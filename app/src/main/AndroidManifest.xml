@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Adapter.AdapterCategory"></activity>
+        <activity android:name=".UI.User.UserActivity"></activity>
+        <activity android:name=".UI.Report.ReportActivity" />
+        <activity android:name=".Adapter.AdapterCategory" />
         <activity android:name=".UI.Supplier.SupplierActivity" />
         <activity android:name=".UI.Shipped.ShippeedActivity" />
         <activity android:name=".UI.Recieved.RecievedActivity" />
