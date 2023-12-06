@@ -120,8 +120,9 @@ interface ApiService {
         @Field("name") name : String,
         @Field("stok") stok : String,
         @Field("price") price : String,
-        @Field("description") description : String
-    ) : Call<ModelResponse>
+        @Field("description") description : String,
+        @Field("status") status : String
+        ) : Call<ModelResponse>
 
     @FormUrlEncoded
     @POST("UpdateSupplier.php")

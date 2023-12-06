@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">E-Inventory</string>
+    <string-array name="status">
+        <item>aktif</item>
+        <item>nonaktif</item>
+    </string-array>
 </resources>

@@ -1,11 +1,13 @@
 package com.example.e_inventory.Adapter
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.e_inventory.Model.ModelProduct
@@ -19,6 +21,8 @@ class AdapterProduct(
         val NamaProduk = view.findViewById<TextView>(R.id.NamaProduk)
         val HargaProduk = view.findViewById<TextView>(R.id.HargaProduk)
         val StokProduk = view.findViewById<TextView>(R.id.Stok)
+        val TxtStatus = view.findViewById<TextView>(R.id.textStatus)
+        val BgStatus = view.findViewById<LinearLayout>(R.id.bgStatus)
 
     }
     interface  OnAdapterlistener {
@@ -38,6 +42,13 @@ class AdapterProduct(
         holder.NamaProduk.text = data.name
         holder.HargaProduk.text = "Rp. ${data.price.toString()}"
         holder.StokProduk.text = "Stok :${data.stok.toString()}"
+        holder.TxtStatus.text = data.status
+
+        if (data.status == "aktif"){
+            holder.TxtStatus.setTextColor(Color.parseColor("Green"))
+        }else{
+            holder.TxtStatus.setTextColor(Color.parseColor("RED"))
+        }
 
         holder.itemView.setOnClickListener {
             listener.onClick(data)
