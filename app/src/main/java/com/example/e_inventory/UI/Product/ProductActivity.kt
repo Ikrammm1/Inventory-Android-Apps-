@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,7 @@ import com.example.e_inventory.Adapter.AdapterCategory
 import com.example.e_inventory.Adapter.AdapterProduct
 import com.example.e_inventory.Model.ModelProduct
 import com.example.e_inventory.R
+import com.example.e_inventory.UI.Beranda.BerandaActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,14 +24,26 @@ class ProductActivity : AppCompatActivity() {
 
     lateinit var ListProduct : RecyclerView
     lateinit var Adapter : AdapterProduct
+    lateinit var BtnAdd : ImageView
     private var gridLayoutManager: GridLayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product)
 
+        val BtnBack = findViewById<LinearLayout>(R.id.BtnBack)
+        BtnBack.setOnClickListener {
+            startActivity(Intent(this, BerandaActivity::class.java))
+        }
+
         getProduct()
         setUpListProduct()
+
+        BtnAdd = findViewById(R.id.btnAdd)
+
+        BtnAdd.setOnClickListener {
+            startActivity(Intent(this, AddProductActivity::class.java))
+        }
 
 
     }

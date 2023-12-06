@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.e_inventory">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -9,9 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".UI.Supplier.DetailSupplierActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".UI.Category.AddCategoryActivity"></activity>
+        <activity android:name=".UI.Product.AddProductActivity" />
+        <activity android:name=".UI.Supplier.DetailSupplierActivity" />
         <activity android:name=".UI.Category.DetailKategoriActivity" />
         <activity android:name=".UI.Product.DetailProductActivity" />
         <activity android:name=".Adapter.AdapterProduct" />
