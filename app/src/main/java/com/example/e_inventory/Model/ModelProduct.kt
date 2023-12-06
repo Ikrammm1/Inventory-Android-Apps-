@@ -7,10 +7,10 @@ class ModelProduct (
     data class dataProduct(
         var id : String,
         var category_id : String,
-        var product_id : String,
+        var supplier_id : String,
         var name : String,
-        var stok : Int,
-        var price : Float,
+        var stok : String,
+        var price : String,
         var description : String,
         var category : String,
         var supplier : String,

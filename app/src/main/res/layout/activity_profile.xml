@@ -27,6 +27,7 @@
             android:gravity="center"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/txtNama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -36,6 +37,7 @@
                 android:textColor="@color/white"/>
 
             <TextView
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_email"
@@ -69,6 +71,7 @@
                 android:fontFamily="@font/roboto"/>
 
             <EditText
+                android:id="@+id/EdEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
@@ -77,6 +80,7 @@
                 android:inputType="textEmailAddress"
                 android:background="@drawable/search"/>
             <EditText
+                android:id="@+id/EdPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
@@ -95,6 +99,7 @@
                 android:fontFamily="@font/roboto"/>
 
             <EditText
+                android:id="@+id/EdNamaUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
@@ -103,6 +108,7 @@
                 android:inputType="text"
                 android:background="@drawable/search"/>
             <EditText
+                android:id="@+id/EdPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
@@ -110,7 +116,8 @@
                 android:hint="Nomor Telpon"
                 android:inputType="text"
                 android:background="@drawable/search"/>
-            <TextView
+            <EditText
+                android:id="@+id/EdAlamat"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:padding="15dp"
@@ -120,6 +127,7 @@
                 android:background="@drawable/search"/>
 
             <Button
+                android:id="@+id/BtnSimpan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btnungu"
