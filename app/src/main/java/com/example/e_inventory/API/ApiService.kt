@@ -136,7 +136,8 @@ interface ApiService {
     @POST("UpdateCategory.php")
     fun EditCategory(
         @Field("category_id") category_id : String,
-        @Field("name") name : String
+        @Field("name") name : String,
+        @Field("status") status : String
     ) : Call<ModelResponse>
 
     @FormUrlEncoded

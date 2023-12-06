@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context=".UI.Category.DetailKategoriActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="10dp"
+                android:background="@color/white">
+                <ImageView
+                    android:id="@+id/GambarKategori"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/banner"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:padding="20dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Kategori"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="5dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"/>
+                <EditText
+                    android:id="@+id/EdNamaKategori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:padding="20dp"
+                    android:text="Rumah Tangga"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="5dp"
+                    android:textSize="14dp"
+                    android:inputType="text"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/search"
+                    android:fontFamily="@font/roboto"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Status Kategori"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:layout_marginBottom="5dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"/>
+                <EditText
+                    android:id="@+id/EdStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:padding="20dp"
+                    android:text="Aktif"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="5dp"
+                    android:textSize="14dp"
+                    android:inputType="text"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/search"
+                    android:fontFamily="@font/roboto"/>
+
+                <Button
+                    android:id="@+id/BtnSimpan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/btnungu"
+                    android:text="Simpan"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
