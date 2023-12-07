@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="20dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/NamaProduk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nama Produk"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto"/>
+                <TextView
+                    android:id="@+id/TglMasuk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="17-06-2023"
+                    android:gravity="end"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/Quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Quantity"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/Kategori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Kategori"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/Supplier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Supplier"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto"/>
+                <TextView
+                    android:id="@+id/Phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="+6281232111233"
+                    android:gravity="end"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/Alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Alamat"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/BtnEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_edit_"
+                    android:drawablePadding="10dp"
+                    android:layout_weight="1"
+                    android:text="Edit Data"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto"/>
+                <TextView
+                    android:id="@+id/BtnDelete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_delete"
+                    android:gravity="center"
+                    android:drawablePadding="10dp"
+                    android:layout_weight="1"
+                    android:text="Hapus Data"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/roboto"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -23,52 +23,44 @@ class DetailKategoriActivity : AppCompatActivity() {
     private val CategoryId by lazy { intent.getStringExtra("categoryId") }
     private val StatusCategory by lazy { intent.getStringExtra("statusCategory") }
     private lateinit var Kategori : EditText
-    private lateinit var Status : Spinner
-    private lateinit var NewStatus : String
     private lateinit var BtnSimpan : Button
-    private lateinit var BtnTambah : ImageView
-    //    private lateinit var BtnHapus : Button
+        private lateinit var BtnHapus : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_kategori)
         Kategori = findViewById(R.id.EdNamaKategori)
-        Status = findViewById(R.id.EdStatus)
         BtnSimpan = findViewById(R.id.BtnSimpan)
-        BtnTambah = findViewById(R.id.btnAdd)
-//        BtnHapus = findViewById(R.id.BtnHapus)
+        BtnHapus = findViewById(R.id.BtnHapus)
 
         val BtnBack = findViewById<LinearLayout>(R.id.BtnBack)
         BtnBack.setOnClickListener {
             startActivity(Intent(this, BerandaActivity::class.java))
         }
 
-        BtnTambah.setOnClickListener {
-            startActivity(Intent(this, AddCategoryActivity::class.java))
+        BtnHapus.setOnClickListener {
+            RetrofitClient.instance.DeleteCategory(CategoryId.toString())
+                .enqueue(object : Callback<ModelResponse>{
+                override fun onFailure(call: Call<ModelResponse>, t: Throwable) {
+                    Toast.makeText(this@DetailKategoriActivity, "Maaf Sistem Sedang Gangguan", Toast.LENGTH_SHORT).show()
+                    Log.e("Kesalahan API Hapus Kategori : ", t.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<ModelResponse>,
+                    response: Response<ModelResponse>
+                ) {
+                    AlertDialog.Builder(this@DetailKategoriActivity)
+                        .setTitle("Apakah Anda Yakin Ingin Hapus Data?")
+                        .setPositiveButton("Ya", DialogInterface.OnClickListener { dialog, which ->
+                            Toast.makeText(this@DetailKategoriActivity, "Berhasil", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this@DetailKategoriActivity, BerandaActivity::class.java))
+                        })
+                        .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialog, which ->  })
+                        .show()
+                }
+
+            })
         }
-//        BtnHapus.setOnClickListener {
-//            RetrofitClient.instance.DeleteCategory(CategoryId.toString())
-//                .enqueue(object : Callback<ModelResponse>{
-//                override fun onFailure(call: Call<ModelResponse>, t: Throwable) {
-//                    Toast.makeText(this@DetailKategoriActivity, "Maaf Sistem Sedang Gangguan", Toast.LENGTH_SHORT).show()
-//                    Log.e("Kesalahan API Hapus Kategori : ", t.toString())
-//                }
-//
-//                override fun onResponse(
-//                    call: Call<ModelResponse>,
-//                    response: Response<ModelResponse>
-//                ) {
-//                    AlertDialog.Builder(this@DetailKategoriActivity)
-//                        .setTitle("Apakah Anda Yakin Ingin Hapus Data?")
-//                        .setPositiveButton("Ya", DialogInterface.OnClickListener { dialog, which ->
-//                            Toast.makeText(this@DetailKategoriActivity, "Berhasil", Toast.LENGTH_SHORT).show()
-//                            startActivity(Intent(this@DetailKategoriActivity, BerandaActivity::class.java))
-//                        })
-//                        .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialog, which ->  })
-//                        .show()
-//                }
-//
-//            })
-//        }
 
         Kategori.setText(NamaCategory)
         val items = resources.getStringArray(R.array.status)
@@ -79,25 +71,12 @@ class DetailKategoriActivity : AppCompatActivity() {
             else -> 0 // Pilih item pertama jika tidak ada data yang sesuai
         }
 
-        // Set item yang dipilih pada spinner
-        Status.setSelection(selectedItemPosition)
 
-        Status.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
-               NewStatus = items[position]
-                // Lakukan sesuatu dengan item yang dipilih
-            }
-
-            override fun onNothingSelected(parentView: AdapterView<*>?) {
-                // Tidak ada yang dipilih
-            }
-        }
 
         BtnSimpan.setOnClickListener {
             RetrofitClient.instance.EditCategory(
                 CategoryId.toString(),
-                Kategori.text.toString(),
-                NewStatus
+                Kategori.text.toString()
             ).enqueue(object : Callback<ModelResponse>{
                 override fun onFailure(call: Call<ModelResponse>, t: Throwable) {
                     Toast.makeText(this@DetailKategoriActivity, "Maaf Sistem Sedang Gangguan", Toast.LENGTH_SHORT).show()

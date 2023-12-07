@@ -45,6 +45,7 @@ class AddProductActivity : AppCompatActivity() {
         EdCategory = findViewById(R.id.EdKategoriProduk)
         BtnSimpan = findViewById(R.id.BtnSimpan)
 
+
         fetchSuppliers()
         fetchCategory()
 

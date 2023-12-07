@@ -21,13 +21,19 @@ interface ApiService {
     @GET("ListCategory.php")
     fun Category():Call<ModelCategory>
 
+    @GET("AllCategories.php")
+    fun AllCategories():Call<ModelCategory>
+
+    @GET("AllSupplier.php")
+    fun AllSupplier():Call<ModelSupplier>
+
     @GET("ListSupplier.php")
     fun Supplier():Call<ModelSupplier>
 
     @GET("ListProduct.php")
     fun Product():Call<ModelProduct>
 
-    @GET("ListRecieved.php")
+    @GET("ListBarangMasuk.php")
     fun Recieved():Call<ModelRecieved>
 
     @GET("ListShipped.php")
@@ -120,8 +126,7 @@ interface ApiService {
         @Field("name") name : String,
         @Field("stok") stok : String,
         @Field("price") price : String,
-        @Field("description") description : String,
-        @Field("status") status : String
+        @Field("description") description : String
         ) : Call<ModelResponse>
 
     @FormUrlEncoded
@@ -131,14 +136,13 @@ interface ApiService {
         @Field("name") name : String,
         @Field("address") address : String,
         @Field("phone_number") phone_number : String
-    ) : Call<ModelResponse>
+        ) : Call<ModelResponse>
 
     @FormUrlEncoded
     @POST("UpdateCategory.php")
     fun EditCategory(
         @Field("category_id") category_id : String,
-        @Field("name") name : String,
-        @Field("status") status : String
+        @Field("name") name : String
     ) : Call<ModelResponse>
 
     @FormUrlEncoded

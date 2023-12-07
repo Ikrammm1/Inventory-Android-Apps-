@@ -182,27 +182,6 @@
                     android:textSize="14dp"
                     android:background="@drawable/search"
                     android:fontFamily="@font/roboto"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Status Produk"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/roboto"/>
-                <Spinner
-                    android:id="@+id/EdStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:layout_marginTop="5dp"
-                    android:textSize="14dp"
-                    android:entries="@array/status"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/search"
-                    android:fontFamily="@font/roboto"/>
 
                 <Button
                     android:id="@+id/BtnSimpan"
@@ -214,6 +193,16 @@
                     android:text="Simpan"
                     android:textColor="@color/white"
                     android:textAllCaps="false"/>
+                                <Button
+                                    android:id="@+id/BtnHapus"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="20dp"
+                                    android:layout_marginTop="15dp"
+                                    android:background="@drawable/btnhapus"
+                                    android:text="Hapus"
+                                    android:textColor="#BC0606"
+                                    android:textAllCaps="false"/>
             </LinearLayout>
         </LinearLayout>
 

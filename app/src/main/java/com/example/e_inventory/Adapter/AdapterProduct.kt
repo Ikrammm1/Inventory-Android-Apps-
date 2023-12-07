@@ -21,8 +21,6 @@ class AdapterProduct(
         val NamaProduk = view.findViewById<TextView>(R.id.NamaProduk)
         val HargaProduk = view.findViewById<TextView>(R.id.HargaProduk)
         val StokProduk = view.findViewById<TextView>(R.id.Stok)
-        val TxtStatus = view.findViewById<TextView>(R.id.textStatus)
-        val BgStatus = view.findViewById<LinearLayout>(R.id.bgStatus)
 
     }
     interface  OnAdapterlistener {
@@ -42,13 +40,6 @@ class AdapterProduct(
         holder.NamaProduk.text = data.name
         holder.HargaProduk.text = "Rp. ${data.price.toString()}"
         holder.StokProduk.text = "Stok :${data.stok.toString()}"
-        holder.TxtStatus.text = data.status
-
-        if (data.status == "aktif"){
-            holder.TxtStatus.setTextColor(Color.parseColor("Green"))
-        }else{
-            holder.TxtStatus.setTextColor(Color.parseColor("RED"))
-        }
 
         holder.itemView.setOnClickListener {
             listener.onClick(data)

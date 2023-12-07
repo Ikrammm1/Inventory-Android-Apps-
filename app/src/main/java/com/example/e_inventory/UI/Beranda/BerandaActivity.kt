@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -17,6 +18,7 @@ import com.example.e_inventory.API.RetrofitClient
 import com.example.e_inventory.Adapter.AdapterCategory
 import com.example.e_inventory.Model.ModelCategory
 import com.example.e_inventory.R
+import com.example.e_inventory.UI.Category.AddCategoryActivity
 import com.example.e_inventory.UI.Category.DetailKategoriActivity
 import com.example.e_inventory.UI.Login.LoginActivity
 import com.example.e_inventory.UI.Product.ProductActivity
@@ -43,6 +45,8 @@ class BerandaActivity : AppCompatActivity() {
     private lateinit var profil : SharedPreferences
     lateinit var ListCategory : RecyclerView
     lateinit var Adapter : AdapterCategory
+    private lateinit var BtnTambah : LinearLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +60,8 @@ class BerandaActivity : AppCompatActivity() {
         BtnShipped = findViewById(R.id.btnShipped)
         BtnReport = findViewById(R.id.btnReport)
         BtnUser = findViewById(R.id.btnUser)
+        BtnTambah = findViewById(R.id.btnAdd)
+
 
         getCategory()
         setUpListCategory()
@@ -103,6 +109,9 @@ class BerandaActivity : AppCompatActivity() {
                 .putString("role", profil.getString("role", null))
                 .apply()
             startActivity(Intent(this, ProfileActivity::class.java))
+        }
+        BtnTambah.setOnClickListener {
+            startActivity(Intent(this, AddCategoryActivity::class.java))
         }
     }
 
