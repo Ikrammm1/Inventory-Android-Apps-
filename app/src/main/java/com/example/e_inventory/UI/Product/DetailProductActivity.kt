@@ -1,5 +1,7 @@
 package com.example.e_inventory.UI.Product
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,7 +30,6 @@ class DetailProductActivity : AppCompatActivity() {
     private val Supplier by lazy { intent.getStringExtra("supplier") }
     private val SupplierAddress by lazy { intent.getStringExtra("supplier_address") }
     private val SupplierPhone by lazy { intent.getStringExtra("supplier_phone") }
-    private val Status by lazy { intent.getStringExtra("status") }
 
     private lateinit var EdNamaProduct : EditText
     private lateinit var EdStokProduct : EditText
@@ -36,12 +37,10 @@ class DetailProductActivity : AppCompatActivity() {
     private lateinit var EdDescription : EditText
     private lateinit var EdSupplier : Spinner
     private lateinit var EdCategory : Spinner
-    private lateinit var EdStatus : Spinner
     private lateinit var BtnSimpan : Button
     private lateinit var selectedSupplierId: String
     private lateinit var selectedCategoryId: String
-    private lateinit var NewStatus : String
-
+    private lateinit var BtnHapus : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,9 +56,39 @@ class DetailProductActivity : AppCompatActivity() {
         EdDescription = findViewById(R.id.EdDeskProduk)
         EdSupplier = findViewById(R.id.EdSuppProduk)
         EdCategory = findViewById(R.id.EdKategoriProduk)
-        EdStatus = findViewById(R.id.EdStatus)
         BtnSimpan = findViewById(R.id.BtnSimpan)
+        BtnHapus = findViewById(R.id.BtnHapus)
 
+
+        BtnHapus.setOnClickListener {
+            RetrofitClient.instance.DeleteProduct(id.toString())
+                .enqueue(object : Callback<ModelResponse>{
+                override fun onFailure(call: Call<ModelResponse>, t: Throwable) {
+                    Toast.makeText(this@DetailProductActivity, "Maaf Sistem Sedang Gangguan", Toast.LENGTH_SHORT).show()
+                    Log.e("Kesalahan API Hapus Kategori : ", t.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<ModelResponse>,
+                    response: Response<ModelResponse>
+                ) {
+                    if (response.isSuccessful){
+                        AlertDialog.Builder(this@DetailProductActivity)
+                            .setTitle("Apakah Anda Yakin Ingin Hapus Data?")
+                            .setPositiveButton("Ya", DialogInterface.OnClickListener { dialog, which ->
+                                Toast.makeText(this@DetailProductActivity, "Berhasil", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this@DetailProductActivity, ProductActivity::class.java))
+                            })
+                            .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialog, which ->  })
+                            .show()
+                    }else{
+                        Toast.makeText(this@DetailProductActivity, "Kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+            })
+        }
         EdNamaProduct.setText(NamaProduct)
         EdStokProduct.setText(Stok)
         EdPriceProduct.setText(Price)
@@ -68,27 +97,7 @@ class DetailProductActivity : AppCompatActivity() {
         fetchSuppliers()
         fetchCategory()
 
-        val items = resources.getStringArray(R.array.status)
 
-        val selectedItemPosition = when (Status) {
-            "aktif" -> items.indexOf("aktif")
-            "nonaktif" -> items.indexOf("nonaktif")
-            else -> 0 // Pilih item pertama jika tidak ada data yang sesuai
-        }
-
-        // Set item yang dipilih pada spinner
-        EdStatus.setSelection(selectedItemPosition)
-
-        EdStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
-                NewStatus = items[position]
-                // Lakukan sesuatu dengan item yang dipilih
-            }
-
-            override fun onNothingSelected(parentView: AdapterView<*>?) {
-                // Tidak ada yang dipilih
-            }
-        }
 
         BtnSimpan.setOnClickListener {
             UpdateProduct()
@@ -97,7 +106,7 @@ class DetailProductActivity : AppCompatActivity() {
 
     }
     private fun fetchCategory() {
-        RetrofitClient.instance.Category().enqueue(object : Callback<ModelCategory> {
+        RetrofitClient.instance.AllCategories().enqueue(object : Callback<ModelCategory> {
             override fun onFailure(call: Call<ModelCategory>, t: Throwable) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -139,7 +148,7 @@ class DetailProductActivity : AppCompatActivity() {
     }
 
     private fun fetchSuppliers() {
-        RetrofitClient.instance.Supplier().enqueue(object : Callback<ModelSupplier> {
+        RetrofitClient.instance.AllSupplier().enqueue(object : Callback<ModelSupplier> {
             override fun onFailure(call: Call<ModelSupplier>, t: Throwable) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -189,8 +198,7 @@ class DetailProductActivity : AppCompatActivity() {
             EdNamaProduct.text.toString(),
             EdStokProduct.text.toString(),
             EdPriceProduct.text.toString(),
-            EdDescription.text.toString(),
-            NewStatus
+            EdDescription.text.toString()
         ).enqueue(object : Callback<ModelResponse>{
             override fun onFailure(call: Call<ModelResponse>, t: Throwable) {
                 Toast.makeText(this@DetailProductActivity, "Maaf Sistem Sedang Gangguan", Toast.LENGTH_SHORT).show()
@@ -199,7 +207,13 @@ class DetailProductActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ModelResponse>, response: Response<ModelResponse>) {
                 if (response.isSuccessful){
-                    Toast.makeText(this@DetailProductActivity, "Berhasil", Toast.LENGTH_SHORT).show()
+                    androidx.appcompat.app.AlertDialog.Builder(this@DetailProductActivity)
+                        .setTitle("Apakah Anda Yakin Ingin Merubah Data?")
+                        .setPositiveButton("Ya", DialogInterface.OnClickListener { dialog, which ->
+                            Toast.makeText(this@DetailProductActivity, "Berhasil", Toast.LENGTH_SHORT).show()
+                        })
+                        .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialog, which ->  })
+                        .show()
                 }else{
                     Toast.makeText(this@DetailProductActivity, "Kesalahan", Toast.LENGTH_SHORT).show()
                 }
