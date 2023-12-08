@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.e_inventory.API.RetrofitClient
 import com.example.e_inventory.Adapter.AdapterCategory
 import com.example.e_inventory.Model.ModelCategory
+import com.example.e_inventory.Model.ModelCount
+import com.example.e_inventory.Model.ModelProduct
 import com.example.e_inventory.R
 import com.example.e_inventory.UI.Category.AddCategoryActivity
 import com.example.e_inventory.UI.Category.DetailKategoriActivity
@@ -42,6 +44,10 @@ class BerandaActivity : AppCompatActivity() {
     lateinit var BtnShipped : CardView
     lateinit var BtnReport : CardView
     lateinit var BtnUser : CardView
+    lateinit var TotalSupplier : TextView
+    lateinit var TotalProduct : TextView
+    lateinit var TotalReceived : TextView
+    lateinit var TotalShipped : TextView
     private lateinit var profil : SharedPreferences
     lateinit var ListCategory : RecyclerView
     lateinit var Adapter : AdapterCategory
@@ -61,10 +67,14 @@ class BerandaActivity : AppCompatActivity() {
         BtnReport = findViewById(R.id.btnReport)
         BtnUser = findViewById(R.id.btnUser)
         BtnTambah = findViewById(R.id.btnAdd)
-
+        TotalSupplier = findViewById(R.id.TotalSupplier)
+        TotalProduct = findViewById(R.id.TotalProd)
+        TotalReceived = findViewById(R.id.TotalReceived)
+        TotalShipped = findViewById(R.id.TotalShipped)
 
         getCategory()
         setUpListCategory()
+        CountItem()
 
         NamaUser.text = "Hey, ${profil.getString("name", null).toString()}"
 
@@ -151,5 +161,25 @@ class BerandaActivity : AppCompatActivity() {
 
         })
         ListCategory.adapter = Adapter
+    }
+    private fun CountItem(){
+        RetrofitClient.instance.CountItem().enqueue(object  : Callback<ModelCount>{
+            override fun onFailure(call: Call<ModelCount>, t: Throwable) {
+                Toast.makeText(this@BerandaActivity, "Maaf Sistem Sedang Gangguan", Toast.LENGTH_SHORT).show()
+                Log.e("Kesalahan API Count : ", t.toString())
+            }
+
+            override fun onResponse(call: Call<ModelCount>, response: Response<ModelCount>) {
+                if (response.isSuccessful){
+                    TotalProduct.text = response.body()!!.total_produk
+                    TotalSupplier.text = response.body()!!.total_supplier
+                    TotalReceived.text = response.body()!!.total_received
+                    TotalShipped.text = response.body()!!.total_shipped
+                }else{
+                    Toast.makeText(this@BerandaActivity, "Maaf Sistem Sedang Gangguan", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        })
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
@@ -29,11 +30,13 @@ class RecievedActivity : AppCompatActivity() {
     lateinit var ListReceived : RecyclerView
     lateinit var Adapter : AdapterReceived
     lateinit var BtnAdd : ImageView
+    lateinit var TotalReceived : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recieved)
 
+        TotalReceived = findViewById(R.id.TotalReceived)
         val BtnBack = findViewById<LinearLayout>(R.id.BtnBack)
 
         BtnBack.setOnClickListener {
@@ -47,7 +50,7 @@ class RecievedActivity : AppCompatActivity() {
         BtnAdd = findViewById(R.id.btnAdd)
 
         BtnAdd.setOnClickListener {
-            startActivity(Intent(this, AddSupplierActivity::class.java))
+            startActivity(Intent(this, AddReceivedActivity::class.java))
         }
     }
 
@@ -60,6 +63,7 @@ class RecievedActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<ModelRecieved>, response: Response<ModelRecieved>) {
                 if (response.isSuccessful){
+                    TotalReceived.text = response.body()!!.Recieved.size.toString()
                     val ListData = response.body()!!.Recieved
                     ListData.forEach {
                         Adapter.setData(ListData)
@@ -76,11 +80,12 @@ class RecievedActivity : AppCompatActivity() {
         ListReceived = findViewById(R.id.ListReceived)
         Adapter = AdapterReceived(arrayListOf(), object : AdapterReceived.OnAdapterlistener{
             override fun onClick(received: ModelRecieved.dataRecieved) {
-                startActivity(Intent(this@RecievedActivity, DetailSupplierActivity::class.java)
+                startActivity(Intent(this@RecievedActivity, EditReceivedActivity::class.java)
                     .putExtra("id", received.id)
                     .putExtra("product", received.product)
                     .putExtra("qty", received.qty)
                     .putExtra("alamat", received.supplier_address)
+                    .putExtra("description", received.description)
                     .putExtra("phone", received.supplier_phone)
                     .putExtra("tglMasuk", received.date_in)
                     .putExtra("kategori", received.category)
@@ -88,6 +93,7 @@ class RecievedActivity : AppCompatActivity() {
                     .putExtra("category_id", received.category_id)
                     .putExtra("product_id", received.product_id)
                     .putExtra("supplier_id", received.supplier_id)
+                    .putExtra("admin", received.admin)
                 )
             }
 

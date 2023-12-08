@@ -45,7 +45,7 @@ class AdapterReceived(
         val data = Received[position]
         holder.NamaProduk.text = data.product
         holder.DateIn.text = data.date_in
-        holder.Qty.text = data.qty
+        holder.Qty.text = "Quantity : ${data.qty}"
         holder.Kategori.text = data.category
         holder.Supplier.text = data.supplier
         holder.Phone.text = data.supplier_phone

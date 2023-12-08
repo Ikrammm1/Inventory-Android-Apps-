@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Adapter.AdapterReceived"></activity>
+        <activity android:name=".UI.Recieved.EditReceivedActivity"></activity>
+        <activity android:name=".UI.Recieved.AddReceivedActivity" />
+        <activity android:name=".Adapter.AdapterReceived" />
         <activity android:name=".UI.Supplier.AddSupplierActivity" />
         <activity android:name=".Adapter.AdapterSupplier" />
         <activity android:name=".UI.Category.AddCategoryActivity" />

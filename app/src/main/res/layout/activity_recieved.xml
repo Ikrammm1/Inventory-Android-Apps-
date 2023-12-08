@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/ungu"
+        android:background="@drawable/bgheader"
         android:elevation="7dp"
         android:padding="25dp"
         android:orientation="vertical">
