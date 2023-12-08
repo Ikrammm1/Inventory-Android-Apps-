@@ -36,6 +36,9 @@ interface ApiService {
     @GET("ListBarangMasuk.php")
     fun Recieved():Call<ModelRecieved>
 
+    @GET("CountItem.php")
+    fun CountItem():Call<ModelCount>
+
     @GET("ListShipped.php")
     fun Shipped():Call<ModelShipped>
 
@@ -78,7 +81,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("AddBarangMasuk.php")
     fun AddBarangMasuk(
-        @Field("dateIn") dateIn : String,
+        @Field("date_in") date_in : String,
         @Field("admin") admin : String,
         @Field("product_id") product_id : String,
         @Field("qty") qty : String,
@@ -110,8 +113,7 @@ interface ApiService {
     @POST("UpdateBarangMasuk.php")
     fun EditBarangMasuk(
         @Field("id") id : String,
-        @Field("dateIn") dateIn : String,
-        @Field("admin") admin : String,
+        @Field("date_in") date_in : String,
         @Field("product_id") product_id : String,
         @Field("qty") qty : String,
         @Field("description") description : String

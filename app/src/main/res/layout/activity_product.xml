@@ -21,6 +21,23 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_back"/>
+        <EditText
+            android:id="@+id/EdCari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search"
+            android:textColorHint="@color/white"
+            android:textSize="14sp"
+            android:padding="15dp"
+            android:elevation="10dp"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"
+            android:background="@drawable/search"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
