@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.e_inventory.API.RetrofitClient
 import com.example.e_inventory.Adapter.AdapterCategory
 import com.example.e_inventory.Model.ModelCategory
@@ -52,12 +53,14 @@ class BerandaActivity : AppCompatActivity() {
     lateinit var ListCategory : RecyclerView
     lateinit var Adapter : AdapterCategory
     private lateinit var BtnTambah : LinearLayout
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beranda)
         profil = getSharedPreferences("Login_Session", MODE_PRIVATE)
+        val MenuUser = findViewById<TextView>(R.id.textMenuUser)
         NamaUser = findViewById(R.id.txtNama)
         BtnLogout = findViewById(R.id.btnLogout)
         BtnProduct = findViewById(R.id.btnProduct)
@@ -76,6 +79,14 @@ class BerandaActivity : AppCompatActivity() {
         setUpListCategory()
         CountItem()
 
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            getCategory()
+            setUpListCategory()
+            CountItem()
+            swipeRefreshLayout.isRefreshing = false
+        }
+
         NamaUser.text = "Hey, ${profil.getString("name", null).toString()}"
 
         BtnLogout.setOnClickListener {
@@ -89,8 +100,29 @@ class BerandaActivity : AppCompatActivity() {
                 .setNegativeButton("Tidak", DialogInterface.OnClickListener { dialog, which ->  })
                 .show()
         }
+
+        if (profil.getString("role", null) == "Admin"){
+            MenuUser.text = "Profile"
+
+        }else{
+            MenuUser.text = "Daftar User"
+        }
         BtnUser.setOnClickListener {
-            startActivity(Intent(this, UserActivity::class.java))
+            if (profil.getString("role", null) == "Admin"){
+                getSharedPreferences("Login_Session", MODE_PRIVATE)
+                    .edit()
+                    .putString("id", profil.getString("id", null))
+                    .putString("name", profil.getString("name", null))
+                    .putString("email", profil.getString("email", null))
+                    .putString("password", profil.getString("password", null))
+                    .putString("address", profil.getString("address", null))
+                    .putString("phone", profil.getString("phone", null))
+                    .putString("role", profil.getString("role", null))
+                    .apply()
+                startActivity(Intent(this, ProfileActivity::class.java))
+            }else{
+                startActivity(Intent(this, UserActivity::class.java))
+            }
         }
         BtnProduct.setOnClickListener {
             startActivity(Intent(this, ProductActivity::class.java))

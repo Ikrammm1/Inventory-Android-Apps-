@@ -87,7 +87,7 @@
                     android:textStyle="bold"
                     android:fontFamily="@font/roboto"/>
                 <EditText
-                    android:id="@+id/EdQty"
+                    android:id="@+id/Edqty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:justificationMode="inter_word"

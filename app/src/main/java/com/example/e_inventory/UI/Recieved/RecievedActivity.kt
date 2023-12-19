@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.e_inventory.API.RetrofitClient
 import com.example.e_inventory.Adapter.AdapterReceived
 import com.example.e_inventory.Adapter.AdapterSupplier
@@ -31,6 +32,8 @@ class RecievedActivity : AppCompatActivity() {
     lateinit var Adapter : AdapterReceived
     lateinit var BtnAdd : ImageView
     lateinit var TotalReceived : TextView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,13 @@ class RecievedActivity : AppCompatActivity() {
 
         getReceived()
         setUpListReceived()
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            getReceived()
+            setUpListReceived()
+            swipeRefreshLayout.isRefreshing = false
+        }
 
 
         BtnAdd = findViewById(R.id.btnAdd)
@@ -98,7 +108,7 @@ class RecievedActivity : AppCompatActivity() {
             }
 
             override fun onDelete(received: ModelRecieved.dataRecieved) {
-                RetrofitClient.instance.DeleteSupplier(received.id)
+                RetrofitClient.instance.DeleteRecieved(received.id, received.product_id)
                     .enqueue(object : Callback<ModelResponse>{
                         override fun onFailure(call: Call<ModelResponse>, t: Throwable) {
                             Toast.makeText(this@RecievedActivity, "Maaf Sistem Sedang Gangguan", Toast.LENGTH_SHORT).show()

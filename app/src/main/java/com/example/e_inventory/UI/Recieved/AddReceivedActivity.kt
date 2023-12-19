@@ -41,7 +41,7 @@ class AddReceivedActivity : AppCompatActivity() {
             startActivity(Intent(this, RecievedActivity::class.java))
         }
         EdNamaProduct = findViewById(R.id.EdNamaProduk)
-        EdQty = findViewById(R.id.EdQty)
+        EdQty = findViewById(R.id.Edqty)
         EdTgl = findViewById(R.id.EdTgl)
         EdDescription = findViewById(R.id.EdDesk)
         BtnSimpan = findViewById(R.id.BtnSimpan)

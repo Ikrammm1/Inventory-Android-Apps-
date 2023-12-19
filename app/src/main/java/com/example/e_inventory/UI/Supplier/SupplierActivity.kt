@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.e_inventory.API.RetrofitClient
 import com.example.e_inventory.Adapter.AdapterProduct
 import com.example.e_inventory.Adapter.AdapterSupplier
@@ -30,6 +31,7 @@ class SupplierActivity : AppCompatActivity() {
     lateinit var ListSupplier : RecyclerView
     lateinit var Adapter : AdapterSupplier
     lateinit var BtnAdd : ImageView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +40,14 @@ class SupplierActivity : AppCompatActivity() {
         val BtnBack = findViewById<LinearLayout>(R.id.BtnBack)
         getSupplier()
         setUpListSupplier()
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            getSupplier()
+            setUpListSupplier()
+            swipeRefreshLayout.isRefreshing = false
+        }
+
         BtnBack.setOnClickListener {
             startActivity(Intent(this, BerandaActivity::class.java))
         }

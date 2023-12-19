@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.e_inventory.API.RetrofitClient
 import com.example.e_inventory.Adapter.AdapterCategory
 import com.example.e_inventory.Adapter.AdapterProduct
@@ -26,6 +27,8 @@ class ProductActivity : AppCompatActivity() {
     lateinit var Adapter : AdapterProduct
     lateinit var BtnAdd : ImageView
     private var gridLayoutManager: GridLayoutManager? = null
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +41,13 @@ class ProductActivity : AppCompatActivity() {
 
         getProduct()
         setUpListProduct()
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            getProduct()
+            setUpListProduct()
+            swipeRefreshLayout.isRefreshing = false
+        }
 
         BtnAdd = findViewById(R.id.btnAdd)
 
