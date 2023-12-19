@@ -1,7 +1,7 @@
 package com.example.e_inventory.Model
 
 class ModelUser(
-    val User : List<dataUsers>
+    val Users : List<dataUsers>
 ) {
     data class dataUsers(
         var id : String,

@@ -3,16 +3,26 @@
     package="com.example.e_inventory">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UI.Recieved.EditReceivedActivity"></activity>
+        <activity android:name=".UI.Report.ExportActivity"></activity>
+        <activity android:name=".UI.User.AddUserActivity" />
+        <activity android:name=".UI.User.UpdateUserActivity" />
+        <activity android:name=".Adapter.AdapterUsers" />
+        <activity android:name=".UI.Shipped.EditShippedActivity" />
+        <activity android:name=".UI.Shipped.AddShippedActivity" />
+        <activity android:name=".Adapter.AdapterShipped" />
+        <activity android:name=".UI.Recieved.EditReceivedActivity" />
         <activity android:name=".UI.Recieved.AddReceivedActivity" />
         <activity android:name=".Adapter.AdapterReceived" />
         <activity android:name=".UI.Supplier.AddSupplierActivity" />

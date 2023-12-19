@@ -1,6 +1,7 @@
 package com.example.e_inventory.API
 
 import com.example.e_inventory.Model.*
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -15,7 +16,7 @@ interface ApiService {
         @Field("password") password : String
     ) : Call<ResponseLogin>
 
-    @GET("ListUsers.php")
+    @GET("ListUser.php")
     fun Users():Call<ModelUser>
 
     @GET("ListCategory.php")
@@ -39,7 +40,7 @@ interface ApiService {
     @GET("CountItem.php")
     fun CountItem():Call<ModelCount>
 
-    @GET("ListShipped.php")
+    @GET("ListBarangKeluar.php")
     fun Shipped():Call<ModelShipped>
 
     @FormUrlEncoded
@@ -91,7 +92,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("AddBarangKeluar.php")
     fun AddBarangKeluar(
-        @Field("dateOut") dateOut : String,
+        @Field("date_out") date_out : String,
         @Field("admin") admin : String,
         @Field("product_id") product_id : String,
         @Field("qty") qty : String,
@@ -102,11 +103,12 @@ interface ApiService {
     @POST("UpdateBarangKeluar.php")
     fun EditBarangKeluar(
         @Field("id") id : String,
-        @Field("dateOut") dateOut : String,
-        @Field("admin") admin : String,
+        @Field("date_out") date_out : String,
         @Field("product_id") product_id : String,
         @Field("qty") qty : String,
-        @Field("description") description : String
+        @Field("description") description : String,
+        @Field("id_awal") id_awal : String,
+        @Field("qty_awal") qty_awal : String
     ) : Call<ModelResponse>
 
     @FormUrlEncoded
@@ -186,14 +188,23 @@ interface ApiService {
     @FormUrlEncoded
     @POST("DeleteRecieve.php")
     fun DeleteRecieved(
-        @Field("id") id : String
+        @Field("id") id : String,
+        @Field("product_id") product_id : String
     ) : Call<ModelResponse>
 
     @FormUrlEncoded
     @POST("DeleteShipped.php")
     fun DeleteShipped(
-        @Field("id") id : String
+        @Field("id") id : String,
+        @Field("product_id") product_id : String
     ) : Call<ModelResponse>
+
+    @FormUrlEncoded
+    @POST("ReportReceived.php")
+    fun ReportReceived(
+        @Field("dateStart") dateStart : String,
+        @Field("dateEnd") dateEnd : String
+    ) : Call<ResponseBody>
 
 
 
